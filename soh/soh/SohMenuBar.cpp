@@ -32,6 +32,7 @@
 #include "Enhancements/gameplaystatswindow.h"
 #include "Enhancements/debugger/MessageViewer.h"
 #include "Enhancements/randomizer/randomizer_check_tracker.h"
+#include "Enhancements/randomizer/randomizer_companion.h"
 #include "Enhancements/randomizer/randomizer_entrance_tracker.h"
 #include "Enhancements/randomizer/randomizer_item_tracker.h"
 #include "Enhancements/randomizer/randomizer_settings_window.h"
@@ -1895,6 +1896,7 @@ extern std::shared_ptr<ItemTrackerSettingsWindow> mItemTrackerSettingsWindow;
 extern std::shared_ptr<EntranceTrackerWindow> mEntranceTrackerWindow;
 extern std::shared_ptr<CheckTracker::CheckTrackerWindow> mCheckTrackerWindow;
 extern std::shared_ptr<CheckTracker::CheckTrackerSettingsWindow> mCheckTrackerSettingsWindow;
+extern std::shared_ptr<Companion::CompanionSettingsWindow> mCompanionSettingsWindow;
 
 void DrawRandomizerMenu() {
     if (ImGui::BeginMenu("Randomizer")) {
@@ -1942,6 +1944,12 @@ void DrawRandomizerMenu() {
         if (mCheckTrackerSettingsWindow) {
             if (ImGui::Button(GetWindowButtonText("Check Tracker Settings", CVarGetInteger(CVAR_WINDOW("CheckTrackerSettings"), 0)).c_str(), buttonSize)) {
                 mCheckTrackerSettingsWindow->ToggleVisibility();
+            }
+        }
+        UIWidgets::Spacer(0);
+        if (mCompanionSettingsWindow) {
+            if (ImGui::Button(GetWindowButtonText("Companion Settings", CVarGetInteger("gCompanionSettingsEnabled", 0)).c_str(), buttonSize)) {
+                mCompanionSettingsWindow->ToggleVisibility();
             }
         }
         ImGui::PopStyleVar(3);
